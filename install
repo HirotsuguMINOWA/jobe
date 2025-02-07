@@ -54,7 +54,9 @@ def get_webserver():
         ps_lines = subprocess.check_output(ps_cmd, shell=True).decode('utf8').split('\n')
     except subprocess.CalledProcessError:
         raise Exception("ps command to find web-server user id failed. Is the web server running?")
+    print(f"{ps_lines=}")
     names = {ps_line.split(' ')[0] for ps_line in ps_lines}
+    print(f"{names=}")
     candidates = names.intersection(set(['apache', 'www-data', 'nginx']))
     print(f"{candidates=}")
     if len(candidates) != 1:
